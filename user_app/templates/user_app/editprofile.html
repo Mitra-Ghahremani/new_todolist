@@ -9,20 +9,18 @@
 
 </head>
 <body>
-
-<div class="profile-box">
+ <div class="profile-box" >
 <h2>ویرایش اطلاعات کاربر</h2>
+
 
  <form action="" method="POST" novalidate>
     {% csrf_token  %}
-
-
-<i>نام: {{user.first_name}}</i>
-<i>نام خانوادگی: {{user.last_name}}</i>   
-<i>ایمیل: {{user.email}}</i>    
 <i>شماره تلفن: {{profile.phone_number}}</i>
 <i>آدرس: {{profile.address}}</i>
 <i>سطح تحصیلات: {{profile.education_level}}</i>
+<i>نام: {{user.first_name}}</i>    
+<i>نام خانوادگی: {{user.last_name}}</i>   
+<i>ایمیل: {{user.email}}</i>
 <button type="submit">ارسال</button>
       </form>   
      </div>

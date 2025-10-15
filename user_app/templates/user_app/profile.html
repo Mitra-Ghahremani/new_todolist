@@ -12,6 +12,9 @@
 <img src="{{profile.image.url}}" alt="عکس کاربر">
 
 <div  class="info">
+<i>نام: {{request.user.first_name}}</i> 
+<i>نام خانوادگی: {{request.user.last_name}}</i>   
+<i>ایمیل: {{request.user.email}}</i>
 <i>شماره تلفن: {{profile.phone_number}}</i>
 <i>آدرس: {{profile.address}}</i>
 <i>سطح تحصیلات: {{profile.education_level}}</i>
