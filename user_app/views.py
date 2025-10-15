@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
-from .forms import UserProfileForm,UserForm,LoginForm
+from .forms import UserProfileForm,UserForm,LoginForm,userEditForm
 from .models import userProfile
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import get_object_or_404
 def home(request):
     context={}
     return render(request,"user_app/home.html",context)
@@ -59,19 +59,15 @@ def editProfile(request,pk):
         #خواندن آبجکت مرتبط با آیدی درخواستی از دیتابیس
         profileObject=userProfile.objects.get(id=pk)
         profile=UserProfileForm(instance=profileObject)
-        user=UserForm(instance=request.user) 
-
+        user=userEditForm(instance=request.user) 
         if request.method=='POST':
-            user=UserForm(request.POST or None , instance=request.user)
-           
-            profile=UserProfileForm(request.POST or None , instance=profileObject)
-            
+            user=userEditForm(request.POST , instance=request.user)
+            profile=UserProfileForm(request.POST , instance=profileObject)
             if user.is_valid() and profile.is_valid():
                 user.save()
-                
                 profile.save()
                 return redirect('user_app:my_account')
-            return render(request,"user_app/home.html",context={})
+            return render(request,"user_app/editprofile.html",context={"user":user,"profile":profile})
 
         return render(request,"user_app/editprofile.html",
                       context={'user':user,'profile':profile})

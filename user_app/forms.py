@@ -9,12 +9,19 @@ class UserForm(forms.ModelForm):
         fields=["username","first_name","last_name","email","password"] 
 
 
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model=User
-        fields=['username','password']
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model=userProfile
         exclude=['user']
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=['username','password']  
+
+class userEditForm(forms.ModelForm):
+     class Meta:
+        model=User
+        fields=["first_name","last_name","email"] 
+         
