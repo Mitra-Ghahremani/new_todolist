@@ -40,9 +40,8 @@ def loginUser(request):
         user=authenticate(username=username,password=password)
         if user:
             login(request,user)
-         
+            return redirect('user_app:my_account')
         return render(request,'user_app/login.html',context={'form':form})
-
     return render(request,'user_app/login.html',context={'form':form})
 
 
