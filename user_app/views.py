@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .forms import UserProfileForm,UserForm,LoginForm
 from .models import userProfile
 from django.contrib.auth import authenticate,login
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     context={}
@@ -52,6 +53,25 @@ def profileUser(request):
         return render(request,'user_app/profile.html',context={'profile':profile})
     #اگر احراز هویت نشده بود به صفحه لاگین منتقل شود
     return redirect ('user_app:login')
-    
+
+@login_required   
 def editProfile(request,pk):
-    pass
+        #خواندن آبجکت مرتبط با آیدی درخواستی از دیتابیس
+        profileObject=userProfile.objects.get(id=pk)
+        profile=UserProfileForm(instance=profileObject)
+        user=UserForm(instance=request.user) 
+
+        if request.method=='POST':
+            user=UserForm(request.POST or None , instance=request.user)
+           
+            profile=UserProfileForm(request.POST or None , instance=profileObject)
+            
+            if user.is_valid() and profile.is_valid():
+                user.save()
+                
+                profile.save()
+                return redirect('user_app:my_account')
+            return render(request,"user_app/home.html",context={})
+
+        return render(request,"user_app/editprofile.html",
+                      context={'user':user,'profile':profile})

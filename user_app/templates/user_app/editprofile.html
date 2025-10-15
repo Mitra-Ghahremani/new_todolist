@@ -1,0 +1,28 @@
+{% load static   %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ویرایش اطلاعات کاربر</title>
+    <link rel="stylesheet" href="{%  static 'user_app/css/editprofile.css'   %}">
+
+</head>
+<body>
+
+<div class="profile-box">
+<h2>ویرایش اطلاعات کاربر</h2>
+
+ <form action="" method="POST" novalidate>
+    {% csrf_token  %}
+<i>نام: {{user.first_name}}</i>
+<i>نام خانوادگی: {{user.last_name}}</i>   
+<i>ایمیل: {{user.email}}</i>    
+<i>شماره تلفن: {{profile.phone_number}}</i>
+<i>آدرس: {{profile.address}}</i>
+<i>سطح تحصیلات: {{profile.education_level}}</i>
+<button type="submit">ارسال</button>
+      </form>   
+     </div>
+   </body>
+</html>
