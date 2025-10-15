@@ -1,0 +1,23 @@
+{%  load static  %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروفایل کاربری</title>
+    <link rel="stylesheet" href="{% static  'user_app/css/profile.css' %}">
+</head>
+<body>
+ <div  class="profile">
+<img src="{{profile.image.url}}" alt="عکس کاربر">
+
+<div  class="info">
+<i>شماره تلفن: {{profile.phone_number}}</i>
+<i>آدرس: {{profile.address}}</i>
+<i>سطح تحصیلات: {{profile.education_level}}</i>
+<i> تاریخ ایجاد حساب کاربری: {{profile.created}}</i>
+</div>
+<a href=""><p>ویرایش پروفایل</p></a>
+</div> 
+</body>
+</html>

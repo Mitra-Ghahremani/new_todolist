@@ -1,0 +1,25 @@
+{% load static   %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام کاربر</title>
+    <link rel="stylesheet" href="{% static "user_app/css/register.css" %}">
+
+
+    
+</head>
+<body>
+    <div class="register-box" >
+        <h2>ثبت نام</h2>
+    <form action="" method="POST" novalidate>
+    {% csrf_token %}
+    {{user.as_p}}
+    {{profile.as_p}} 
+    <button type="submit">ارسال</button>
+    </form>
+    <p>Do you have an account?  <a href="{% url 'user_app:login' %}"> sing_in </a></p>
+    </div>
+</body>
+</html>

@@ -6,9 +6,15 @@ from django.contrib.auth.models import User
 class UserForm(forms.ModelForm):
     class Meta:
         model=User
-        fields=["username","first_name","last_name","email","password","password"] 
+        fields=["username","first_name","last_name","email","password"] 
 
-class userProfileForm(forms.ModelForm):
+
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model=User
+        fields=['username','password']
+
+class UserProfileForm(forms.ModelForm):
     class Meta:
         model=userProfile
         exclude=['user']
