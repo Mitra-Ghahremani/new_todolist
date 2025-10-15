@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import UserProfileForm,UserForm,LoginForm,userEditForm
 from .models import userProfile
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 def home(request):
@@ -23,7 +23,7 @@ def registerUser(request):
             #برقرار رابطه ی بین پروفایل و یوزر
             profile.user=user
             profile.save()
-            return redirect('user_app:my_account')
+            return redirect('user_app:home')
        
         return render(request,'user_app/register.html',context={'user':user,'profile':profile})
     user=UserForm()
@@ -66,3 +66,10 @@ def editProfile(request,pk):
 
         return render(request,"user_app/editprofile.html",
                       context={'user':user,'profile':profile})
+
+
+def Logout(request):
+         logout(request)
+         return redirect("user_app:login")
+         
+  
