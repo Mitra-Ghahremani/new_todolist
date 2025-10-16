@@ -13,18 +13,14 @@ def registerUser(request):
     if request.method=="POST":
         user=UserForm(request.POST)
         profile=UserProfileForm(request.POST)
-
         if user.is_valid() and profile.is_valid():
             user=user.save(commit=False)
-            #هش کردن پسورد
             user.set_password(user.password)
             user.save()
             profile=profile.save(commit=False)
-            #برقرار رابطه ی بین پروفایل و یوزر
             profile.user=user
             profile.save()
             return redirect('user_app:home')
-       
         return render(request,'user_app/register.html',context={'user':user,'profile':profile})
     user=UserForm()
     profile=UserProfileForm()
