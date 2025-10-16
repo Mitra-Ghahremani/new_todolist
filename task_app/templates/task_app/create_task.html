@@ -9,8 +9,7 @@
     <form action=""  method="POST" novalidate>
           {%  csrf_token   %}
 <div>
-{{form.name.label_tag}}
-{{form.name}}
+{{form.as_p}}
 </div>
       
 
