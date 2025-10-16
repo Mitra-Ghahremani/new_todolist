@@ -3,4 +3,5 @@ from . import views
 
 app_name="task_app"
 
-urlpatterns=[path("create_task/",views.createTask,name='create_task'),]
+urlpatterns=[path("create_task/",views.createTask,name='create_task'),
+             path("display_task/",views.displayTask,name="display_task")]
