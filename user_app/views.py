@@ -17,8 +17,10 @@ def registerUser(request):
             user=user.save(commit=False)
             user.set_password(user.password)
             user.save()
+            print("USERS IS:",user)
             profile=profile.save(commit=False)
             profile.user=user
+            print(user)
             profile.save()
             return redirect('user_app:home')
         return render(request,'user_app/register.html',context={'user':user,'profile':profile})
