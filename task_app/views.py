@@ -12,7 +12,7 @@ def createTask(request):
          task=form.save(commit=False)
          task.user=request.user
          task.save()
-         return render(request,"task_app/create_task.html",context={"form":empty_form})
-
-    print(empty_form)
+         return render(request,"task_app/create_task.html",
+                       context={"form":empty_form,"message":"تسک شما با موفقیت اضافه شد"})
+   
     return render(request,"task_app/create_task.html",context={"form":empty_form})
