@@ -1,18 +1,27 @@
+{%  load static   %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>لیست تسک های کاربر</title>
+    <link rel="stylesheet" href="{%  static   'user_app/css/display.css'  %}">
 </head>
+
 <body>
-    <div>
-    {% for task in tasks   %}
-    {{task.task_name}}
-    {{task.created}}
-    <hr>
-     {% endfor  %}
-    </div>
-   
+<div class="container">
+    <h1>لیست تسک‌ها</h1>
+    <ul id="task-list">
+        {% for task in tasks %}
+        <li class="task-item">
+            <span class="task-text">{{ task.task_name }} - {{ task.created|date:"d, m, Y" }}</span>
+            <div class="task-buttons">
+                <button class="edit-btn">ویرایش</button>
+                <button class="delete-btn">حذف</button>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 </body>
 </html>

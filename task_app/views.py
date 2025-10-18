@@ -22,8 +22,15 @@ def createTask(request):
 
 @login_required
 def displayTask(request):
-   tasks= Task.objects.filter(user_id=request.user.id)
-   if tasks == None:
-      return HttpResponse ("هیچ تسکی برای این کاربر وجود ندارد")
+   tasks=Task.objects.filter(user_id=request.user.id)
+   print(tasks)
+   if tasks:
+         return render(request,"task_app/display_task.html",context={'tasks':tasks})
+   return HttpResponse ("هیچ تسکی برای این کاربر وجود ندارد")
+   
+
+
+
+
+
       
-   return render(request,"task_app/display_task.html",context={'tasks':tasks})
