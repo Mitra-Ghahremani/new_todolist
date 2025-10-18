@@ -1,22 +1,17 @@
+{%  load static  %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ایجاد تسک</title>
+    <title>وبرایش تسک</title>
 </head>
 <body>
-    <form action=""  method="POST" novalidate>
-          {%  csrf_token   %}
+<form action=""  method="POST" novalidate>
+{%  csrf_token   %}
 <div>
 {{form.as_p}}
 </div>
-      
-
 <button type="submit">ارسال</button>
 </form>
-<h2>{{message}}</h2>
-  
- 
 </body>
-</html>

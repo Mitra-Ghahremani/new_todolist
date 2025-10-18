@@ -10,13 +10,16 @@
 
 <body>
 <div class="container">
-    <h1>لیست تسک‌ها</h1>
+    
+    
+
+    <h1>{{request.user.first_name}} لیست تسک های</h1>
     <ul id="task-list">
         {% for task in tasks %}
         <li class="task-item">
-            <span class="task-text">{{ task.task_name }} - {{ task.created|date:"d, m, Y" }}</span>
+            <span class="task-text">{{ task.task_name }}-{{task.created|date:'Y,m,d'}}</span>
             <div class="task-buttons">
-                <button class="edit-btn">ویرایش</button>
+               <a href="{%  url   "task_app:edit_task" task.id   %}"><button class="edit-btn">ویرایش</button></a> 
                 <button class="delete-btn">حذف</button>
             </div>
         </li>

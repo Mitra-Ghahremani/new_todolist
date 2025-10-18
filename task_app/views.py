@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Task
 from .forms import createTaskForm
 from django.contrib.auth.decorators import login_required
@@ -27,8 +27,19 @@ def displayTask(request):
    if tasks:
          return render(request,"task_app/display_task.html",context={'tasks':tasks})
    return HttpResponse ("هیچ تسکی برای این کاربر وجود ندارد")
-   
 
+
+@login_required   
+def editTask(request,id):
+    task=get_object_or_404(Task,id=id)
+    if request.method=="POST":
+        form=createTaskForm(request.POST,instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('task_app:display_task')
+        return render(request,"task_app/edit_task.html",context={"form":form})
+    form=createTaskForm(instance=task)
+    return render(request,"task_app/edit_task.html",context={'form':form})
 
 
 
