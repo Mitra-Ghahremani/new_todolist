@@ -19,8 +19,8 @@
         <li class="task-item">
             <span class="task-text">{{ task.task_name }}-{{task.created|date:'Y,m,d'}}</span>
             <div class="task-buttons">
-               <a href="{%  url   "task_app:edit_task" task.id   %}"><button class="edit-btn">ویرایش</button></a> 
-                <button class="delete-btn">حذف</button>
+               <a href="{%  url   "task_app:edit_task"  task.id   %}"><button class="edit-btn">ویرایش</button></a> 
+               <a href="{%  url  "task_app:delete_task"  task.id %}"> <button class="delete-btn">حذف</button></a>
             </div>
         </li>
         {% endfor %}

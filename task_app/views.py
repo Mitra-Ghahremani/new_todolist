@@ -31,7 +31,7 @@ def displayTask(request):
 
 @login_required   
 def editTask(request,id):
-    task=get_object_or_404(Task,id=id)
+    task=Task.objects.get(id=id)
     if request.method=="POST":
         form=createTaskForm(request.POST,instance=task)
         if form.is_valid():
@@ -41,7 +41,12 @@ def editTask(request,id):
     form=createTaskForm(instance=task)
     return render(request,"task_app/edit_task.html",context={'form':form})
 
-
-
+@login_required
+def deleteTask(request,id):
+    task=Task.objects.get(id=id)
+    if request.method == "POST":
+        task.delete()
+        return HttpResponse("تسک شما با موفقیت حذف گردید")
+    return render(request,"task_app/delete_task.html",context={'task':task})
 
       

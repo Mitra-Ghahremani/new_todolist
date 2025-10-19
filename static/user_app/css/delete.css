@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: #f6f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    direction: rtl;
+}
+
+.container {
+    background-color: white;
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.task-name {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    border: none;
+    text-decoration: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-danger {
+    background-color: #e63946;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c71c2b;
+}
+
+.btn-secondary {
+    background-color: #ccc;
+    color: #222;
+}
+
+.btn-secondary:hover {
+    background-color: #b3b3b3;
+}
+
