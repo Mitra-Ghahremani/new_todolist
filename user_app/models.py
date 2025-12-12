@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
   
 class userProfile(models.Model):
-    
     level=(('دیپلم','دیپلم'),('کاردانی','کاردانی'),('کارشناسی','کارشناسی'),
            ('فوق لیسانس','فوق لیسانس'),('دکتری','دکتری'),('سایر','سایر'))
     

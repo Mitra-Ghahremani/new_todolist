@@ -4,6 +4,10 @@ from .models import userProfile
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+
+
+
+
 def home(request):
     context={}
     return render(request,"user_app/home.html",context)
@@ -17,18 +21,17 @@ def registerUser(request):
             user=user.save(commit=False)
             user.set_password(user.password)
             user.save()
-            print("USERS IS:",user)
+           
             profile=profile.save(commit=False)
             profile.user=user
-            print(user)
+           
             profile.save()
+            print("profile is:",profile)
             return redirect('user_app:home')
         return render(request,'user_app/register.html',context={'user':user,'profile':profile})
     user=UserForm()
     profile=UserProfileForm()
     return render(request,"user_app/register.html",context={'user':user,'profile':profile})
-
-
 
 def loginUser(request):
     form=LoginForm()

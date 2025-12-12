@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Task
+from .models import Task,TODOLIST
 from .forms import createTaskForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -12,20 +12,20 @@ def createTask(request):
       form=createTaskForm(request.POST)
       if form.is_valid():
          task=form.save(commit=False)
-         task.user=request.user
-         print(task.user)
          task.save()
+         todolist=TODOLIST(task=task,user=request.user)
+         todolist.save()
          return render(request,"task_app/create_task.html",
                        context={"form":empty_form,"message":"تسک شما با موفقیت اضافه شد"})
-   
     return render(request,"task_app/create_task.html",context={"form":empty_form})
+
 
 @login_required
 def displayTask(request):
-   tasks=Task.objects.filter(user_id=request.user.id)
-   print(tasks)
-   if tasks:
-         return render(request,"task_app/display_task.html",context={'tasks':tasks})
+   todolist=TODOLIST.objects.filter(user=request.user)
+   print(todolist)
+   if todolist:
+         return render(request,"task_app/display_task.html",context={'todolist':todolist})
    return HttpResponse ("هیچ تسکی برای این کاربر وجود ندارد")
 
 
