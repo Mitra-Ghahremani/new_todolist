@@ -5,14 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 
+
 @login_required
 def createTask(request):
     empty_form=createTaskForm()
     if request.method=='POST':
       form=createTaskForm(request.POST)
       if form.is_valid():
-         task=form.save(commit=False)
-         task.save()
+         task=form.save()
          todolist=TODOLIST(task=task,user=request.user)
          todolist.save()
          return render(request,"task_app/create_task.html",
@@ -26,7 +26,7 @@ def displayTask(request):
    print(todolist)
    if todolist:
          return render(request,"task_app/display_task.html",context={'todolist':todolist})
-   return HttpResponse ("هیچ تسکی برای این کاربر وجود ندارد")
+   return HttpResponse (" تو دو لیست برای این کاربر وجود ندارد")
 
 
 @login_required   
@@ -37,7 +37,7 @@ def editTask(request,id):
         if form.is_valid():
             form.save()
             return redirect('task_app:display_task')
-        return render(request,"task_app/edit_task.html",context={"form":form})
+        return render(request,"task_app/edit_task.html",context={"message":"تسک  باید حداکثر 150 کاراکتر داشته باشد"})
     form=createTaskForm(instance=task)
     return render(request,"task_app/edit_task.html",context={'form':form})
 
