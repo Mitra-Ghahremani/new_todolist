@@ -2,7 +2,6 @@ from django.shortcuts import render,redirect
 from .models import Task,TODOLIST
 from .forms import createTaskForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 
 
@@ -39,11 +38,14 @@ def editTask(request,id):
             return redirect('task_app:display_task')
         return render(request,"task_app/edit_task.html",context={"message":"تسک  باید حداکثر 150 کاراکتر داشته باشد"})
     form=createTaskForm(instance=task)
+ 
     return render(request,"task_app/edit_task.html",context={'form':form})
+
 
 @login_required
 def deleteTask(request,id):
     task=Task.objects.get(id=id)
+    print(task)
     if request.method == "POST":
         task.delete()
         return HttpResponse("تسک شما با موفقیت حذف گردید")
