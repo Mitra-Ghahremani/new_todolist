@@ -12,13 +12,13 @@
 <div class="container">
     
     
-
-    <h1>{{request.user.first_name}}   تو دو لیست</h1>
+     <h1></h1>
+    <h2>{{request.user.first_name}} تو دو لیست</h2>
     <ul id="task-list">
         {% for task in todolist %}
         
         <li class="task-item">
-            <span class="task-text">{{ task.task.description }}-{{ task.task.created_date|date:'Y,m,d' }}</span>
+            <span class="task-text"> {{ task.task.description }} </span>
             <div class="task-buttons">
                <a href="{%  url   "task_app:edit_task"  task.id   %}"><button class="edit-btn">ویرایش</button></a> 
                <a href="{%  url  "task_app:delete_task"  task.id %}"> <button class="delete-btn">حذف</button></a>

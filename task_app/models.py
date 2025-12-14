@@ -15,6 +15,6 @@ class TODOLIST(models.Model):
     task=models.ForeignKey(Task,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     def __str__(self):
-        return self.task.description
+        return self.user.username
 
 

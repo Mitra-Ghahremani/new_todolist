@@ -62,14 +62,14 @@ h1 {
     opacity: 0.8;
 }
 
-.done {
-  background-color: green;
-  color: white;
+button.done {
+  background-color: green !important;
+  color: white !important;
 }
 
-.not-done {
-  background-color: red;
-  color: white;
+button.not-done {
+  background-color: red !important;
+  color: white !important;
 }
 
 
