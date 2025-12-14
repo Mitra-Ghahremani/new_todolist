@@ -54,6 +54,6 @@ def deleteTask(request,id):
 @login_required
 def endTask(request,id):
     task=Task.objects.get(id=id)
-    task.status=True
+    task.status==True
     return redirect("task_app:display_task")
 
