@@ -23,7 +23,7 @@
                <a href="{%  url   "task_app:edit_task"  task.id   %}"><button class="edit-btn">ویرایش</button></a> 
                <a href="{%  url  "task_app:delete_task"  task.id %}"> <button class="delete-btn">حذف</button></a>
                {%  if  task.task.status == False    %}
-               <a href="{%  url   "task_app:end_task" task.id %}"><button class="not-done"> پایان </button></a>
+               <a href="{%  url   "task_app:end_task" task.id %}"> <button  class="not-done">پایان</button> </a>
                {%  endif  %}
                {%  if task.task.status == True  %}
                <button class="done">انجام شده</button>

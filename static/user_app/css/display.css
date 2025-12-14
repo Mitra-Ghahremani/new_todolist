@@ -63,10 +63,13 @@ h1 {
 }
 
 .done {
-  color: green;
+  background-color: green;
+  color: white;
 }
 
 .not-done {
-  color: red;
+  background-color: red;
+  color: white;
 }
+
 
