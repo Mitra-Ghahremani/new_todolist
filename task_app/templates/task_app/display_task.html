@@ -22,7 +22,8 @@
             <div class="task-buttons">
                <a href="{%  url   "task_app:edit_task"  task.id   %}"><button class="edit-btn">ویرایش</button></a> 
                <a href="{%  url  "task_app:delete_task"  task.id %}"> <button class="delete-btn">حذف</button></a>
-            </div>
+               <a href="{%  url   "task_app:end_task"  %}"><button class="delete-btn"> پایان </button></a>
+            </div> 
       
         </li>
         {% endfor %}

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 class Task(models.Model):
     description=models.TextField(max_length=150)
     created_date=models.DateTimeField(auto_now=True)
+    status=models.BooleanField(default=False)
     def __str__(self):
         return self.description
     

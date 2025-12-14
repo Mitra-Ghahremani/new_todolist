@@ -6,4 +6,5 @@ app_name="task_app"
 urlpatterns=[path("create_task/",views.createTask,name='create_task'),
              path("display_task/",views.displayTask,name="display_task"),
              path("edit_task/<int:id>/",views.editTask,name="edit_task"),
-             path("delete_task/<int:id>",views.deleteTask,name="delete_task")]
+             path("delete_task/<int:id>",views.deleteTask,name="delete_task"),
+             path("end_task/<int:id>",views.endTask,name="end_task")]

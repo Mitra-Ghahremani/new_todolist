@@ -51,4 +51,9 @@ def deleteTask(request,id):
         return HttpResponse("تسک شما با موفقیت حذف گردید")
     return render(request,"task_app/delete_task.html",context={'task':task})
 
-      
+@login_required
+def endTask(request,id):
+    task=Task.objects.get(id=id)
+    task.status=True
+    return redirect("task_app:display_task")
+
