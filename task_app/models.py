@@ -12,7 +12,7 @@ class Task(models.Model):
     
     
 class TODOLIST(models.Model):
-    task=models.ForeignKey(Task,on_delete=models.CASCADE,null=True)
+    task=models.ForeignKey(Task,on_delete=models.CASCADE,null=True,blank=True)
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     def __str__(self):
         return self.user.username
