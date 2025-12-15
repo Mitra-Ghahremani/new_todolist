@@ -23,12 +23,11 @@ def createTask(request):
 
 @login_required
 def displayTask(request):
-   todolist=TODOLIST.objects.filter(user=request.user)
-   print(todolist)
-   if todolist:
-         return render(request,"task_app/display_task.html",context={'todolist':todolist})
-   return HttpResponse (" تو دو لیست برای این کاربر وجود ندارد")
-
+   task=Task.objects.filter(todolist_id=request.user.id)
+   print(task)
+   if task:
+       return render(request,"task_app/display_task.html",context={"task":task})
+   return  HttpResponse ("برای این کاربر تسکی وجود ندارد")
 
 @login_required   
 def editTask(request,id):
