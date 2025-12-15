@@ -17,7 +17,7 @@ class Task(models.Model):
     status=models.BooleanField(default=False)
     todolist=models.ForeignKey(TODOLIST,on_delete=models.CASCADE,blank=True)
     def __str__(self):
-        return self.description
+        return self.todolist.user.username
     
     
 
