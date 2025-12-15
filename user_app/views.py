@@ -25,7 +25,8 @@ def registerUser(request):
             profile=profile.save(commit=False)
             profile.user=user
             profile.save()
-            TODOLIST.user=user
+            Todolist=TODOLIST(user=user)
+            Todolist.save()
             print("profile is:",profile)
             return redirect('user_app:home')
         return render(request,'user_app/register.html',context={'user':user,'profile':profile})
