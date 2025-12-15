@@ -4,7 +4,7 @@ from .models import userProfile
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
-
+from  task_app.models import TODOLIST
 
 
 
@@ -24,8 +24,8 @@ def registerUser(request):
            
             profile=profile.save(commit=False)
             profile.user=user
-           
             profile.save()
+            TODOLIST.user=user
             print("profile is:",profile)
             return redirect('user_app:home')
         return render(request,'user_app/register.html',context={'user':user,'profile':profile})
