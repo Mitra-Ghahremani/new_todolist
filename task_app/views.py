@@ -11,8 +11,9 @@ def createTask(request):
     if request.method=='POST':
       form=createTaskForm(request.POST)
       if form.is_valid():
+         form.save(commit=False)
+         form.todolist=request.user
          form.save()
-         
       
          return render(request,"task_app/create_task.html",
                        context={"form":empty_form,"message":"تسک شما با موفقیت اضافه شد"})
