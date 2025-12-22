@@ -2,9 +2,13 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+<<<<<<< HEAD
 
 from .forms import UserProfileForm,UserForm,LoginForm,UserEditForm
 from .models import UserProfile
+=======
+from  task_app.models import TODOLIST
+>>>>>>> 4fb3f105ac882c8eb8debcaf5c7d7596e6057772
 
 
 
@@ -23,9 +27,19 @@ def register_user(request):
             user = user.save(commit=False)
             user.set_password(user.password)
             user.save()
+<<<<<<< HEAD
             profile = profile.save(commit=False)
             profile.user = user
             profile.save()
+=======
+           
+            profile=profile.save(commit=False)
+            profile.user=user
+            profile.save()
+            Todolist=TODOLIST(user=user)
+            Todolist.save()
+            print("profile is:",profile)
+>>>>>>> 4fb3f105ac882c8eb8debcaf5c7d7596e6057772
             return redirect('user_app:home')
         
 
