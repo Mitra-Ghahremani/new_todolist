@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from .models import Task, ToDoList
+from .models import Task
 from .forms import CreateTaskForm
 
 
@@ -12,26 +12,26 @@ from .forms import CreateTaskForm
 def create_task(request):
     empty_form = CreateTaskForm()
     if request.method == 'POST':
-      form=CreateTaskForm(request.POST)
-      if form.is_valid():
-         form=form.save(commit=False)
-         form.todolist_id=request.user.id
-         form.save()
-         return render(request,
+        form=CreateTaskForm(request.POST)
+        if form.is_valid():
+            form =  form.save(commit=False)
+            form.todolist_id = request.user.id
+            form.save()
+            return render(request,
                        "task_app/create_task.html",
-                       context={"form":empty_form, "message":"تسک شما با موفقیت اضافه شد"}
-                               )
+                       context={"form":empty_form, "message":"تسک شما با موفقیت اضافه شد"})
       
 
     return render(request,"task_app/create_task.html",context={"form":empty_form})
 
-
+@login_required
 def display_task(request):
-   task=Task.objects.filter(todolist_id=request.user.id)
-   print(task)
-   if task:
-       return render(request,"task_app/display_task.html",context={"task":task})
-   return  HttpResponse ("برای این کاربر تسکی وجود ندارد")
+    task = Task.objects.filter(todolist_id=request.user.id)
+    if task:
+        return render(request,"task_app/display_task.html", context={"task":task})
+   
+
+    return  HttpResponse ("برای این کاربر تسکی وجود ندارد")
 
 
 @login_required   

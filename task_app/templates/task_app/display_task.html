@@ -15,17 +15,17 @@
      <h1></h1>
     <h2>{{request.user.first_name}} تو دو لیست</h2>
     <ul id="task-list">
-        {% for task in todolist %}
+        {% for task in task %}
         
         <li class="task-item">
-            <span class="task-text"> {{ task.task.description }} </span>
+            <span class="task-text"> {{ task.description }} </span>
             <div class="task-buttons">
                <a href="{%  url   "task_app:edit_task"  task.id   %}"><button class="edit-btn">ویرایش</button></a> 
                <a href="{%  url  "task_app:delete_task"  task.id %}"> <button class="delete-btn">حذف</button></a>
-               {%  if  task.task.status == False    %}
+               {%  if  task.status == False    %}
                <a href="{%  url   "task_app:end_task" task.id %}"> <button  class="not-done">پایان</button> </a>
                {%  endif  %}
-               {%  if task.task.status == True  %}
+               {%  if task.status == True  %}
                <button class="done">انجام شده</button>
                {% endif %}
             </div> 
