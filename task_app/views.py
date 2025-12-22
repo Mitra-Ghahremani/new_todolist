@@ -10,33 +10,28 @@ from .forms import CreateTaskForm
 
 @login_required
 def create_task(request):
-    empty_form = CreateTaskForm()       
+    empty_form = CreateTaskForm()
     if request.method == 'POST':
-        form = CreateTaskForm(request.POST)
-        if form.is_valid():
-            task = form.save()
-            todolist = ToDoList(task=task, user=request.user)
-            todolist.save()
-            return render(request,
-                         "task_app/create_task.html",
-                          context={"form":empty_form,"message":"تسک شما با موفقیت اضافه شد"})
-        
+      form=CreateTaskForm(request.POST)
+      if form.is_valid():
+         form=form.save(commit=False)
+         form.todolist_id=request.user.id
+         form.save()
+         return render(request,
+                       "task_app/create_task.html",
+                       context={"form":empty_form, "message":"تسک شما با موفقیت اضافه شد"}
+                               )
+      
 
-    return render(request, 
-                  "task_app/create_task.html", 
-                  context={"form":empty_form})
+    return render(request,"task_app/create_task.html",context={"form":empty_form})
 
 
-@login_required
 def display_task(request):
-    todolist = ToDoList.objects.filter(user=request.user)
-    if todolist:
-        return render(request,
-                      "task_app/display_task.html", 
-                      context={'todolist':todolist})
-    
-
-    return HttpResponse ("تو دو لیست برای این کاربر وجود ندارد")
+   task=Task.objects.filter(todolist_id=request.user.id)
+   print(task)
+   if task:
+       return render(request,"task_app/display_task.html",context={"task":task})
+   return  HttpResponse ("برای این کاربر تسکی وجود ندارد")
 
 
 @login_required   
