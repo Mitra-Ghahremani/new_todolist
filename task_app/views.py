@@ -1,61 +1,82 @@
-from django.shortcuts import render,redirect
-from .models import Task,TODOLIST
-from .forms import createTaskForm
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
+from .models import Task, ToDoList
+from .forms import CreateTaskForm
+
+
 
 
 @login_required
-def createTask(request):
-    empty_form=createTaskForm()
-    if request.method=='POST':
-      form=createTaskForm(request.POST)
-      if form.is_valid():
-         task=form.save()
-         todolist=TODOLIST(task=task,user=request.user)
-         todolist.save()
-         return render(request,"task_app/create_task.html",
-                       context={"form":empty_form,"message":"تسک شما با موفقیت اضافه شد"})
-    return render(request,"task_app/create_task.html",context={"form":empty_form})
+def create_task(request):
+    empty_form = CreateTaskForm()       
+    if request.method == 'POST':
+        form = CreateTaskForm(request.POST)
+        if form.is_valid():
+            task = form.save()
+            todolist = ToDoList(task=task, user=request.user)
+            todolist.save()
+            return render(request,
+                         "task_app/create_task.html",
+                          context={"form":empty_form,"message":"تسک شما با موفقیت اضافه شد"})
+        
+
+    return render(request, 
+                  "task_app/create_task.html", 
+                  context={"form":empty_form})
 
 
 @login_required
-def displayTask(request):
-   todolist=TODOLIST.objects.filter(user=request.user)
-   print(todolist)
-   if todolist:
-         return render(request,"task_app/display_task.html",context={'todolist':todolist})
-   return HttpResponse (" تو دو لیست برای این کاربر وجود ندارد")
+def display_task(request):
+    todolist = ToDoList.objects.filter(user=request.user)
+    if todolist:
+        return render(request,
+                      "task_app/display_task.html", 
+                      context={'todolist':todolist})
+    
+
+    return HttpResponse ("تو دو لیست برای این کاربر وجود ندارد")
 
 
 @login_required   
-def editTask(request,id):
-    task=Task.objects.get(id=id)
-    if request.method=="POST":
-        form=createTaskForm(request.POST,instance=task)
+def edit_task(request, id):
+    task = Task.objects.get(id=id) 
+    form=CreateTaskForm(instance=task)
+    if request.method == "POST":
+        form = CreateTaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
             return redirect('task_app:display_task')
-        return render(request,"task_app/edit_task.html",context={"message":"تسک  باید حداکثر 150 کاراکتر داشته باشد"})
-    form=createTaskForm(instance=task)
- 
-    return render(request,"task_app/edit_task.html",context={'form':form})
+        
+
+        return render(request, 
+                     "task_app/edit_task.html",
+                      context={"message":"تسک  باید حداکثر 150 کاراکتر داشته باشد"})
+    
+
+    return render(request, 
+                  "task_app/edit_task.html", 
+                   context={'form':form})
 
 
 @login_required
-def deleteTask(request,id):
-    task=Task.objects.get(id=id)
-    print(task)
+def delete_task(request, id):
+    task = Task.objects.get(id=id)
     if request.method == "POST":
         task.delete()
         return HttpResponse("تسک شما با موفقیت حذف گردید")
-    return render(request,"task_app/delete_task.html",context={'task':task})
+    
+
+    return render(request,
+                  "task_app/delete_task.html", 
+                  context={'task':task})
+
 
 @login_required
-def endTask(request,id):
-    task=Task.objects.get(id=id)
-    print(task)
-    task.status=True
+def end_task(request, id):
+    task = Task.objects.get(id=id)
+    task.status = True 
     task.save()
     return redirect("task_app:display_task")
 

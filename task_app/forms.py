@@ -1,7 +1,8 @@
 from django import forms
+
 from .models import Task
 
-class createTaskForm(forms.ModelForm):
+class CreateTaskForm(forms.ModelForm):
     class Meta:
-        model=Task
-        fields=['description']
+        model = Task
+        fields = ['description']
